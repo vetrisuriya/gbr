@@ -153,8 +153,13 @@ centre, programme or article is a data edit — no new page files.
 
 ## The journey animation
 
-`src/components/fertility-journey.tsx` is the centrepiece. A 460vh section drives
-a sticky, full-height stage through five beats:
+`src/components/fertility-journey.tsx` is the centrepiece. It is a two-column
+scrollytelling block, not a full-screen takeover: a chapter column on the left
+and a sticky 4:3 animation panel on the right, sized to roughly a third of the
+viewport. On narrow screens the panel pins under the header and the chapters
+scroll beneath it.
+
+The five chapters drive the same stage through five beats:
 
 1. **Swim** — sperm travel along a beziér path toward the egg
 2. **Meet** — fertilisation flash
@@ -163,8 +168,17 @@ a sticky, full-height stage through five beats:
 5. **Arrive** — the illustration fades and a photograph of a baby resolves
 
 Progress is measured from the section's bounding rect on `scroll`/`resize`
-rather than with `useScroll`, which proved unreliable here. Under
-`prefers-reduced-motion` the component renders a static summary instead.
+rather than with `useScroll`, which proved unreliable here. The divisor is the
+section height minus the pinned panel height, so the last chapter finishes
+exactly as the panel unpins.
+
+The story then continues as a hairline thread down the page margin
+(`src/components/journey-thread.tsx`): it wraps every section from *The GBR
+approach* to the FAQ, filling as the reader scrolls and closing just above the
+footer's call to action. It is decorative, hidden below `xl`, and costs one
+scroll listener.
+
+Under `prefers-reduced-motion` the component renders a static summary instead.
 
 ## Forms
 

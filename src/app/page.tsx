@@ -8,6 +8,7 @@ import {
   Phone,
 } from "lucide-react";
 import { FertilityJourney } from "@/components/fertility-journey";
+import { JourneyThread } from "@/components/journey-thread";
 import { ParallaxMedia } from "@/components/parallax-media";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { SectionHeading, Btn, Pill } from "@/components/ui";
@@ -173,10 +174,10 @@ export default function HomePage() {
 
             <Reveal delay={0.12}>
               <p className="mt-9 max-w-xl text-[1.05rem] leading-[1.75] text-ink-soft">
-                GBR is a fertility centre built around one idea: that the path to
-                parenthood should be explained clearly, planned honestly, and
-                walked together. Twenty years of reproductive medicine, one team,
-                three centres.
+                GBR is a fertility centre built around one idea: that the path
+                to parenthood should be explained clearly, planned honestly, and
+                walked together. Twenty years of reproductive medicine, one
+                team, three centres.
               </p>
             </Reveal>
 
@@ -268,438 +269,444 @@ export default function HomePage() {
       {/* ------------------------------------------------------------- JOURNEY */}
       <FertilityJourney />
 
-      {/* ------------------------------------------------------------ APPROACH */}
-      <section className="relative py-24 md:py-32">
-        <div className="container-x">
-          <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
-            <Reveal>
-              <SectionHeading
-                eyebrow="The GBR approach"
-                title={
-                  <>
-                    Fertility care that treats
-                    <br className="hidden md:block" /> the whole story.
-                  </>
-                }
-                intro="Investigations can find a cause. They cannot find what it feels like to wait. Our process is built to do both — clear medicine, delivered without hurry."
-              />
-              <div className="mt-9">
-                <Btn href="/about" variant="secondary">
-                  About the clinic <ArrowUpRight className="size-4" />
-                </Btn>
-              </div>
-            </Reveal>
-
-            <Stagger className="grid gap-x-12 gap-y-11 sm:grid-cols-2">
-              {approach.map((step) => (
-                <StaggerItem key={step.n}>
-                  <div className="group border-t border-ink/12 pt-6">
-                    <span className="font-mono text-[0.7rem] tracking-[0.22em] text-teal-deep">
-                      {step.n}
-                    </span>
-                    <h3 className="mt-3 font-display text-[1.4rem] leading-snug">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2.5 text-[0.9rem] leading-[1.7] text-ink-soft">
-                      {step.body}
-                    </p>
-                  </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-
-          <div className="mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {trustPoints.map((point, i) => (
-              <Reveal key={point.title} delay={i * 0.06} className="h-full">
-                <Card className="group h-full gap-0 border-ink/8 bg-white/55 py-0 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:bg-white/90 hover:shadow-soft">
-                  <span className="grid size-9 place-items-center rounded-full bg-teal/10 text-teal-deep transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
-                    <Check className="size-4" />
-                  </span>
-                  <h3 className="mt-5 font-display text-[1.15rem] leading-snug">
-                    {point.title}
-                  </h3>
-                  <p className="mt-2 text-[0.85rem] leading-[1.7] text-ink-soft">
-                    {point.body}
-                  </p>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------- SPECIALITIES */}
-      <section className="border-y border-ink/8 bg-cream-deep/60 py-24 md:py-32">
-        <div className="container-x">
-          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <Reveal>
-              <SectionHeading
-                eyebrow="Specialities"
-                title="Care organised around what you need."
-                intro="Eight clinical programmes, one team. Every speciality shares the same laboratory, the same records and the same consultant group."
-              />
-            </Reveal>
-            <Reveal delay={0.1}>
-              <Btn href="/specialities" variant="secondary">
-                All specialities <ArrowRight className="size-4" />
-              </Btn>
-            </Reveal>
-          </div>
-
-          <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {specialities.map((s) => (
-              <StaggerItem key={s.slug} className="h-full">
-                <Card className="group h-full gap-0 border-ink/8 bg-cream py-0 p-0 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:shadow-soft">
-                  <Link
-                    href={`/specialities/${s.slug}`}
-                    className="flex h-full flex-col p-7"
-                  >
-                    <span className="grid size-11 place-items-center rounded-2xl bg-teal/10 text-teal-deep transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
-                      <ContentIcon name={s.icon} className="size-5" />
-                    </span>
-                    <h3 className="mt-6 font-display text-[1.18rem] leading-snug">
-                      {s.title}
-                    </h3>
-                    <p className="mt-2.5 flex-1 text-[0.84rem] leading-[1.7] text-ink-soft">
-                      {s.summary}
-                    </p>
-                    <span className="mt-6 inline-flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-teal-deep">
-                      Learn more
-                      <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </span>
-                  </Link>
-                </Card>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------- DOCTOR */}
-      <section className="relative overflow-hidden py-24 md:py-32">
-        <div className="container-x grid items-center gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">
-          <Reveal>
-            <figure className="relative mx-auto max-w-md">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-ink/10 bg-cream-deep">
-                <ParallaxMedia
-                  src={doctor.photo ?? "/brand/dr-buvaneswari.jpg"}
-                  alt={doctor.name}
-                  sizes="(max-width: 1024px) 90vw, 40vw"
-                  imageClassName="object-top"
-                  className="absolute inset-0"
+      <JourneyThread>
+        {/* ------------------------------------------------------------ APPROACH */}
+        <section className="relative py-24 md:py-32">
+          <div className="container-x">
+            <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
+              <Reveal>
+                <SectionHeading
+                  eyebrow="The GBR approach"
+                  title={
+                    <>
+                      Fertility care that treats
+                      <br className="hidden md:block" /> the whole story.
+                    </>
+                  }
+                  intro="Investigations can find a cause. They cannot find what it feels like to wait. Our process is built to do both — clear medicine, delivered without hurry."
                 />
+                <div className="mt-9">
+                  <Btn href="/about" variant="secondary">
+                    About the clinic <ArrowUpRight className="size-4" />
+                  </Btn>
+                </div>
+              </Reveal>
+
+              <Stagger className="grid gap-x-12 gap-y-11 sm:grid-cols-2">
+                {approach.map((step) => (
+                  <StaggerItem key={step.n}>
+                    <div className="group border-t border-ink/12 pt-6">
+                      <span className="font-mono text-[0.7rem] tracking-[0.22em] text-teal-deep">
+                        {step.n}
+                      </span>
+                      <h3 className="mt-3 font-display text-[1.4rem] leading-snug">
+                        {step.title}
+                      </h3>
+                      <p className="mt-2.5 text-[0.9rem] leading-[1.7] text-ink-soft">
+                        {step.body}
+                      </p>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
+
+            <div className="mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {trustPoints.map((point, i) => (
+                <Reveal key={point.title} delay={i * 0.06} className="h-full">
+                  <Card className="group h-full gap-0 border-ink/8 bg-white/55 py-0 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:bg-white/90 hover:shadow-soft">
+                    <span className="grid size-9 place-items-center rounded-full bg-teal/10 text-teal-deep transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
+                      <Check className="size-4" />
+                    </span>
+                    <h3 className="mt-5 font-display text-[1.15rem] leading-snug">
+                      {point.title}
+                    </h3>
+                    <p className="mt-2 text-[0.85rem] leading-[1.7] text-ink-soft">
+                      {point.body}
+                    </p>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* -------------------------------------------------------- SPECIALITIES */}
+        <section className="border-y border-ink/8 bg-cream-deep/60 py-24 md:py-32">
+          <div className="container-x">
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+              <Reveal>
+                <SectionHeading
+                  eyebrow="Specialities"
+                  title="Care organised around what you need."
+                  intro="Eight clinical programmes, one team. Every speciality shares the same laboratory, the same records and the same consultant group."
+                />
+              </Reveal>
+              <Reveal delay={0.1}>
+                <Btn href="/specialities" variant="secondary">
+                  All specialities <ArrowRight className="size-4" />
+                </Btn>
+              </Reveal>
+            </div>
+
+            <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {specialities.map((s) => (
+                <StaggerItem key={s.slug} className="h-full">
+                  <Card className="group h-full gap-0 border-ink/8 bg-cream py-0 p-0 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:shadow-soft">
+                    <Link
+                      href={`/specialities/${s.slug}`}
+                      className="flex h-full flex-col p-7"
+                    >
+                      <span className="grid size-11 place-items-center rounded-2xl bg-teal/10 text-teal-deep transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
+                        <ContentIcon name={s.icon} className="size-5" />
+                      </span>
+                      <h3 className="mt-6 font-display text-[1.18rem] leading-snug">
+                        {s.title}
+                      </h3>
+                      <p className="mt-2.5 flex-1 text-[0.84rem] leading-[1.7] text-ink-soft">
+                        {s.summary}
+                      </p>
+                      <span className="mt-6 inline-flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-teal-deep">
+                        Learn more
+                        <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      </span>
+                    </Link>
+                  </Card>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+
+        {/* -------------------------------------------------------------- DOCTOR */}
+        <section className="relative overflow-hidden py-24 md:py-32">
+          <div className="container-x grid items-center gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">
+            <Reveal>
+              <figure className="relative mx-auto max-w-md">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-ink/10 bg-cream-deep">
+                  <ParallaxMedia
+                    src={doctor.photo ?? "/brand/dr-buvaneswari.jpg"}
+                    alt={doctor.name}
+                    sizes="(max-width: 1024px) 90vw, 40vw"
+                    imageClassName="object-top"
+                    className="absolute inset-0"
+                  />
+                </div>
+                <figcaption className="mt-5 flex items-baseline justify-between gap-4 border-t border-ink/12 pt-4">
+                  <span className="font-display text-[1.05rem] text-ink">
+                    {doctor.name}
+                  </span>
+                  <span className="text-[0.68rem] uppercase tracking-[0.13em] text-ink-mute">
+                    Clinical lead
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <Pill tone="pink">Meet your consultant</Pill>
+              <h2 className="mt-6 font-display text-[2.2rem] leading-[1.04] sm:text-[2.8rem] md:text-[3.2rem]">
+                {doctor.name}
+              </h2>
+              <p className="mt-4 text-[0.88rem] leading-relaxed text-ink-mute">
+                {doctor.qualification}
+              </p>
+              <p className="mt-1.5 text-[0.9rem] text-teal-deep">
+                {doctor.speciality}
+              </p>
+
+              <div className="mt-7 space-y-4 text-[0.98rem] leading-[1.75] text-ink-soft">
+                {doctor.bio.map((para) => (
+                  <p key={para.slice(0, 24)}>{para}</p>
+                ))}
               </div>
-              <figcaption className="mt-5 flex items-baseline justify-between gap-4 border-t border-ink/12 pt-4">
-                <span className="font-display text-[1.05rem] text-ink">
-                  {doctor.name}
-                </span>
-                <span className="text-[0.68rem] uppercase tracking-[0.13em] text-ink-mute">
-                  Clinical lead
-                </span>
-              </figcaption>
-            </figure>
-          </Reveal>
 
-          <Reveal delay={0.08}>
-            <Pill tone="pink">Meet your consultant</Pill>
-            <h2 className="mt-6 font-display text-[2.2rem] leading-[1.04] sm:text-[2.8rem] md:text-[3.2rem]">
-              {doctor.name}
-            </h2>
-            <p className="mt-4 text-[0.88rem] leading-relaxed text-ink-mute">
-              {doctor.qualification}
-            </p>
-            <p className="mt-1.5 text-[0.9rem] text-teal-deep">
-              {doctor.speciality}
-            </p>
+              <ul className="mt-8 grid gap-3 border-t border-ink/10 pt-6">
+                {doctor.memberships.map((m) => (
+                  <li
+                    key={m}
+                    className="flex items-start gap-3 text-[0.88rem] leading-relaxed text-ink-soft"
+                  >
+                    <Award className="mt-0.5 size-4 shrink-0 text-pink" />
+                    {m}
+                  </li>
+                ))}
+              </ul>
 
-            <div className="mt-7 space-y-4 text-[0.98rem] leading-[1.75] text-ink-soft">
-              {doctor.bio.map((para) => (
-                <p key={para.slice(0, 24)}>{para}</p>
-              ))}
-            </div>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Btn href="/doctors">Meet the team</Btn>
+                <Btn href="/book" variant="secondary">
+                  Book with Dr Buvaneswari
+                </Btn>
+              </div>
+            </Reveal>
+          </div>
+        </section>
 
-            <ul className="mt-8 grid gap-3 border-t border-ink/10 pt-6">
-              {doctor.memberships.map((m) => (
-                <li
-                  key={m}
-                  className="flex items-start gap-3 text-[0.88rem] leading-relaxed text-ink-soft"
-                >
-                  <Award className="mt-0.5 size-4 shrink-0 text-pink" />
-                  {m}
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Btn href="/doctors">Meet the team</Btn>
-              <Btn href="/book" variant="secondary">
-                Book with Dr Buvaneswari
-              </Btn>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------------------------------------------------------- TREATMENTS */}
-      <section className="border-y border-ink/8 bg-teal-night py-24 text-cream md:py-32">
-        <div className="container-x grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-          <Reveal>
-            <SectionHeading
-              tone="dark"
-              eyebrow="Treatments"
-              title="From a single scan to a full IVF cycle."
-              intro="Treatment is a ladder, not a leap. We start at the least invasive rung that can work for you, and only climb when the evidence says we should."
-            />
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Btn href="/treatments" variant="light">
-                All treatments <ArrowUpRight className="size-4" />
-              </Btn>
-              <Btn href="/book" variant="ghost" className="text-cream hover:bg-white/5 hover:text-teal-bright">
-                Not sure where you fit?
-              </Btn>
-            </div>
-          </Reveal>
-
-          <Stagger className="divide-y divide-cream/10 border-y border-cream/10">
-            {treatments.slice(0, 7).map((t, i) => (
-              <StaggerItem key={t.slug}>
-                <Link
-                  href={`/treatments/${t.slug}`}
-                  className="group grid grid-cols-[auto_1fr_auto] items-start gap-5 py-6"
-                >
-                  <span className="mt-1.5 font-mono text-[0.7rem] text-cream/30 transition-colors group-hover:text-teal-bright/70">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span>
-                    <span className="block font-display text-[1.25rem] text-cream transition-colors group-hover:text-teal-bright md:text-[1.4rem]">
-                      {t.title}
-                    </span>
-                    <span className="mt-1.5 hidden max-w-xl text-[0.85rem] leading-relaxed text-cream/55 sm:block">
-                      {t.summary}
-                    </span>
-                  </span>
-                  <ArrowUpRight className="mt-1.5 size-4 shrink-0 text-cream/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal-bright" />
-                </Link>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* ---------------------------------------------------------- CONDITIONS */}
-      <section className="py-24 md:py-32">
-        <div className="container-x">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20">
+        {/* ---------------------------------------------------------- TREATMENTS */}
+        <section className="border-y border-ink/8 bg-teal-night py-24 text-cream md:py-32">
+          <div className="container-x grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
             <Reveal>
               <SectionHeading
-                eyebrow="Conditions we treat"
-                title="The reasons are many. The plan is personal."
-                intro="PCOS, endometriosis, low reserve, repeated failure, male factor. Each one changes the protocol — and each one has a path forward."
+                tone="dark"
+                eyebrow="Treatments"
+                title="From a single scan to a full IVF cycle."
+                intro="Treatment is a ladder, not a leap. We start at the least invasive rung that can work for you, and only climb when the evidence says we should."
               />
-              <div className="mt-9">
-                <Btn href="/conditions" variant="secondary">
-                  All conditions <ArrowRight className="size-4" />
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Btn href="/treatments" variant="light">
+                  All treatments <ArrowUpRight className="size-4" />
+                </Btn>
+                <Btn
+                  href="/book"
+                  variant="ghost"
+                  className="text-cream hover:bg-white/5 hover:text-teal-bright"
+                >
+                  Not sure where you fit?
                 </Btn>
               </div>
             </Reveal>
 
-            <Stagger className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              {conditions.map((c) => (
-                <StaggerItem key={c.slug}>
+            <Stagger className="divide-y divide-cream/10 border-y border-cream/10">
+              {treatments.slice(0, 7).map((t, i) => (
+                <StaggerItem key={t.slug}>
                   <Link
-                    href={`/conditions/${c.slug}`}
-                    className="group flex items-center gap-3 rounded-2xl border border-ink/10 bg-white/50 px-4 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-teal/35 hover:bg-white"
+                    href={`/treatments/${t.slug}`}
+                    className="group grid grid-cols-[auto_1fr_auto] items-start gap-5 py-6"
                   >
-                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-pink/10 text-pink transition-colors duration-300 group-hover:bg-pink group-hover:text-white">
-                      <ContentIcon name={c.icon} className="size-4" />
+                    <span className="mt-1.5 font-mono text-[0.7rem] text-cream/30 transition-colors group-hover:text-teal-bright/70">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="flex-1 text-[0.9rem] text-ink">
-                      {c.shortTitle ?? c.title}
+                    <span>
+                      <span className="block font-display text-[1.25rem] text-cream transition-colors group-hover:text-teal-bright md:text-[1.4rem]">
+                        {t.title}
+                      </span>
+                      <span className="mt-1.5 hidden max-w-xl text-[0.85rem] leading-relaxed text-cream/55 sm:block">
+                        {t.summary}
+                      </span>
                     </span>
-                    <ArrowUpRight className="size-3.5 text-ink-mute transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-teal-deep" />
+                    <ArrowUpRight className="mt-1.5 size-4 shrink-0 text-cream/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal-bright" />
                   </Link>
                 </StaggerItem>
               ))}
             </Stagger>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ----------------------------------------------------------- VOICES */}
-      <section className="relative overflow-hidden bg-teal-night py-24 md:py-28">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 top-0 size-[30rem] rounded-full bg-teal/15 blur-[110px]"
-        />
-        <div className="container-x relative">
-          <div className="mb-12 flex items-end justify-between gap-6 border-b border-cream/10 pb-5">
-            <p className="eyebrow flex items-center gap-3 text-teal-bright">
-              <span aria-hidden className="h-px w-6 bg-teal-bright/50" />
-              In their words
-            </p>
-            <p className="hidden text-[0.72rem] uppercase tracking-[0.14em] text-cream/35 md:block">
-              Patient stories, shared with permission
-            </p>
-          </div>
-          <Testimonials />
-          <p className="mt-14 max-w-2xl text-[0.72rem] leading-relaxed text-cream/30">
-            Individual results vary. These accounts describe personal
-            experiences and are not a guarantee of outcome.
-          </p>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------- CENTRES */}
-      <section className="py-24 md:py-32">
-        <div className="container-x">
-          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <Reveal>
-              <SectionHeading
-                eyebrow="Our centres"
-                title="Three cities. One standard of care."
-                intro="Consultations close to home, with the full laboratory and surgical team a short journey away when you need them."
-              />
-            </Reveal>
-            <Reveal delay={0.08}>
-              <Btn href="/centres" variant="secondary">
-                Centre details <ArrowRight className="size-4" />
-              </Btn>
-            </Reveal>
-          </div>
-
-          <Stagger className="mt-14 grid gap-5 md:grid-cols-3">
-            {centres.map((c) => (
-              <StaggerItem key={c.slug} className="h-full">
-                <Card className="group flex h-full flex-col gap-0 border-ink/10 bg-white/55 py-0 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:shadow-soft md:p-8">
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-display text-[1.65rem]">{c.city}</h3>
-                    <span className="grid size-8 place-items-center rounded-full bg-teal/10 text-teal transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
-                      <MapPin className="size-3.5" />
-                    </span>
-                  </div>
-                  <p className="mt-4 text-[0.85rem] leading-[1.7] text-ink-soft">
-                    {c.summary}
-                  </p>
-                  <div className="mt-6 space-y-1 border-t border-ink/10 pt-5 text-[0.8rem] leading-relaxed text-ink-mute">
-                    {c.address.map((line) => (
-                      <p key={line}>{line}</p>
-                    ))}
-                  </div>
-                  <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                    <Link
-                      href={`/centres/${c.slug}`}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-[0.75rem] text-cream transition-colors hover:bg-teal-deep"
-                    >
-                      Visit page <ArrowUpRight className="size-3" />
-                    </Link>
-                    <a
-                      href={c.phoneHref}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-ink/15 px-4 py-2 text-[0.75rem] text-ink transition-colors hover:border-teal"
-                    >
-                      <Phone className="size-3" /> Call
-                    </a>
-                  </div>
-                </Card>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* ----------------------------------------------------------- ACADEMICS */}
-      <section className="border-y border-ink/8 bg-cream-deep/60 py-24 md:py-28">
-        <div className="container-x grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-20">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Academics"
-              title="We train the doctors who will come after us."
-              intro="GBR runs an ICOG-recognised fellowship, a reproductive medicine fellowship and dedicated embryology and andrology training — because better-trained clinicians make better fertility care for everyone."
-            />
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Btn href="/academics">Programmes & dates</Btn>
-              <Btn href="/academics/register" variant="secondary">
-                Academic registration
-              </Btn>
-            </div>
-          </Reveal>
-
-          <Stagger className="grid gap-3 sm:grid-cols-2">
-            {academics.map((a) => (
-              <StaggerItem key={a.slug} className="h-full">
-                <Card className="group h-full gap-0 border-ink/10 bg-cream py-0 p-0 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:shadow-soft">
-                  <Link
-                    href={`/academics/${a.slug}`}
-                    className="flex h-full flex-col p-6"
-                  >
-                    <span className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-pink">
-                      {a.duration}
-                    </span>
-                    <span className="mt-2.5 font-display text-[1.12rem] leading-snug">
-                      {a.shortTitle}
-                    </span>
-                    <span className="mt-2 text-[0.8rem] leading-[1.65] text-ink-soft">
-                      {a.summary}
-                    </span>
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-teal-deep">
-                      Details
-                      <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" />
-                    </span>
-                  </Link>
-                </Card>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------- JOURNAL */}
-      <section className="py-24 md:py-32">
-        <div className="container-x">
-          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <Reveal>
-              <SectionHeading
-                eyebrow="The journal"
-                title="Written for the questions you actually ask."
-                intro="Practical, evidence-based reading on fertility, treatment and pregnancy — reviewed by our clinical team."
-              />
-            </Reveal>
-            <Reveal delay={0.08}>
-              <Btn href="/blog" variant="secondary">
-                All articles <ArrowRight className="size-4" />
-              </Btn>
-            </Reveal>
-          </div>
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
-            {featuredPosts.map((post, i) => (
-              <Reveal key={post.slug} delay={i * 0.07} className="h-full">
-                <PostCard post={post} className="h-full" />
+        {/* ---------------------------------------------------------- CONDITIONS */}
+        <section className="py-24 md:py-32">
+          <div className="container-x">
+            <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20">
+              <Reveal>
+                <SectionHeading
+                  eyebrow="Conditions we treat"
+                  title="The reasons are many. The plan is personal."
+                  intro="PCOS, endometriosis, low reserve, repeated failure, male factor. Each one changes the protocol — and each one has a path forward."
+                />
+                <div className="mt-9">
+                  <Btn href="/conditions" variant="secondary">
+                    All conditions <ArrowRight className="size-4" />
+                  </Btn>
+                </div>
               </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ----------------------------------------------------------------- FAQ */}
-      <section className="border-t border-ink/8 bg-cream-deep/40 py-24 md:py-28">
-        <div className="container-x grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Questions"
-              title="Before you book."
-              intro="The things people ask us first — answered without a consultation fee."
-            />
-            <div className="mt-9">
-              <Btn href="/faq" variant="secondary">
-                Read all FAQs <ArrowRight className="size-4" />
-              </Btn>
+              <Stagger className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                {conditions.map((c) => (
+                  <StaggerItem key={c.slug}>
+                    <Link
+                      href={`/conditions/${c.slug}`}
+                      className="group flex items-center gap-3 rounded-2xl border border-ink/10 bg-white/50 px-4 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-teal/35 hover:bg-white"
+                    >
+                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-pink/10 text-pink transition-colors duration-300 group-hover:bg-pink group-hover:text-white">
+                        <ContentIcon name={c.icon} className="size-4" />
+                      </span>
+                      <span className="flex-1 text-[0.9rem] text-ink">
+                        {c.shortTitle ?? c.title}
+                      </span>
+                      <ArrowUpRight className="size-3.5 text-ink-mute transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-teal-deep" />
+                    </Link>
+                  </StaggerItem>
+                ))}
+              </Stagger>
             </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <FaqAccordion faqs={generalFaqs.slice(0, 6)} />
-          </Reveal>
-        </div>
-      </section>
+          </div>
+        </section>
+
+        {/* ----------------------------------------------------------- VOICES */}
+        <section className="relative overflow-hidden bg-teal-night py-24 md:py-28">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -left-32 top-0 size-[30rem] rounded-full bg-teal/15 blur-[110px]"
+          />
+          <div className="container-x relative">
+            <div className="mb-12 flex items-end justify-between gap-6 border-b border-cream/10 pb-5">
+              <p className="eyebrow flex items-center gap-3 text-teal-bright">
+                <span aria-hidden className="h-px w-6 bg-teal-bright/50" />
+                In their words
+              </p>
+              <p className="hidden text-[0.72rem] uppercase tracking-[0.14em] text-cream/35 md:block">
+                Patient stories, shared with permission
+              </p>
+            </div>
+            <Testimonials />
+            <p className="mt-14 max-w-2xl text-[0.72rem] leading-relaxed text-cream/30">
+              Individual results vary. These accounts describe personal
+              experiences and are not a guarantee of outcome.
+            </p>
+          </div>
+        </section>
+
+        {/* ------------------------------------------------------------- CENTRES */}
+        <section className="py-24 md:py-32">
+          <div className="container-x">
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+              <Reveal>
+                <SectionHeading
+                  eyebrow="Our centres"
+                  title="Three cities. One standard of care."
+                  intro="Consultations close to home, with the full laboratory and surgical team a short journey away when you need them."
+                />
+              </Reveal>
+              <Reveal delay={0.08}>
+                <Btn href="/centres" variant="secondary">
+                  Centre details <ArrowRight className="size-4" />
+                </Btn>
+              </Reveal>
+            </div>
+
+            <Stagger className="mt-14 grid gap-5 md:grid-cols-3">
+              {centres.map((c) => (
+                <StaggerItem key={c.slug} className="h-full">
+                  <Card className="group flex h-full flex-col gap-0 border-ink/10 bg-white/55 py-0 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:shadow-soft md:p-8">
+                    <div className="flex items-start justify-between gap-4">
+                      <h3 className="font-display text-[1.65rem]">{c.city}</h3>
+                      <span className="grid size-8 place-items-center rounded-full bg-teal/10 text-teal transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
+                        <MapPin className="size-3.5" />
+                      </span>
+                    </div>
+                    <p className="mt-4 text-[0.85rem] leading-[1.7] text-ink-soft">
+                      {c.summary}
+                    </p>
+                    <div className="mt-6 space-y-1 border-t border-ink/10 pt-5 text-[0.8rem] leading-relaxed text-ink-mute">
+                      {c.address.map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
+                    </div>
+                    <div className="mt-auto flex flex-wrap gap-2 pt-6">
+                      <Link
+                        href={`/centres/${c.slug}`}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-[0.75rem] text-cream transition-colors hover:bg-teal-deep"
+                      >
+                        Visit page <ArrowUpRight className="size-3" />
+                      </Link>
+                      <a
+                        href={c.phoneHref}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-ink/15 px-4 py-2 text-[0.75rem] text-ink transition-colors hover:border-teal"
+                      >
+                        <Phone className="size-3" /> Call
+                      </a>
+                    </div>
+                  </Card>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+
+        {/* ----------------------------------------------------------- ACADEMICS */}
+        <section className="border-y border-ink/8 bg-cream-deep/60 py-24 md:py-28">
+          <div className="container-x grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-20">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Academics"
+                title="We train the doctors who will come after us."
+                intro="GBR runs an ICOG-recognised fellowship, a reproductive medicine fellowship and dedicated embryology and andrology training — because better-trained clinicians make better fertility care for everyone."
+              />
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Btn href="/academics">Programmes & dates</Btn>
+                <Btn href="/academics/register" variant="secondary">
+                  Academic registration
+                </Btn>
+              </div>
+            </Reveal>
+
+            <Stagger className="grid gap-3 sm:grid-cols-2">
+              {academics.map((a) => (
+                <StaggerItem key={a.slug} className="h-full">
+                  <Card className="group h-full gap-0 border-ink/10 bg-cream py-0 p-0 transition-all duration-300 hover:-translate-y-1 hover:border-teal/25 hover:shadow-soft">
+                    <Link
+                      href={`/academics/${a.slug}`}
+                      className="flex h-full flex-col p-6"
+                    >
+                      <span className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-pink">
+                        {a.duration}
+                      </span>
+                      <span className="mt-2.5 font-display text-[1.12rem] leading-snug">
+                        {a.shortTitle}
+                      </span>
+                      <span className="mt-2 text-[0.8rem] leading-[1.65] text-ink-soft">
+                        {a.summary}
+                      </span>
+                      <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-teal-deep">
+                        Details
+                        <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" />
+                      </span>
+                    </Link>
+                  </Card>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+
+        {/* ------------------------------------------------------------- JOURNAL */}
+        <section className="py-24 md:py-32">
+          <div className="container-x">
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+              <Reveal>
+                <SectionHeading
+                  eyebrow="The journal"
+                  title="Written for the questions you actually ask."
+                  intro="Practical, evidence-based reading on fertility, treatment and pregnancy — reviewed by our clinical team."
+                />
+              </Reveal>
+              <Reveal delay={0.08}>
+                <Btn href="/blog" variant="secondary">
+                  All articles <ArrowRight className="size-4" />
+                </Btn>
+              </Reveal>
+            </div>
+            <div className="mt-14 grid gap-5 md:grid-cols-3">
+              {featuredPosts.map((post, i) => (
+                <Reveal key={post.slug} delay={i * 0.07} className="h-full">
+                  <PostCard post={post} className="h-full" />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ----------------------------------------------------------------- FAQ */}
+        <section className="border-t border-ink/8 bg-cream-deep/40 py-24 md:py-28">
+          <div className="container-x grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Questions"
+                title="Before you book."
+                intro="The things people ask us first — answered without a consultation fee."
+              />
+              <div className="mt-9">
+                <Btn href="/faq" variant="secondary">
+                  Read all FAQs <ArrowRight className="size-4" />
+                </Btn>
+              </div>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <FaqAccordion faqs={generalFaqs.slice(0, 6)} />
+            </Reveal>
+          </div>
+        </section>
+      </JourneyThread>
 
       <CtaBand />
     </>
