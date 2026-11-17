@@ -141,8 +141,11 @@ web/
     ├── components/                  Header, footer, journey animation, forms, cards
     ├── data/                        Typed content: site, specialities, treatments,
     │                                conditions, centres, academics, faqs, posts
-    └── lib/cn.ts                    clsx + tailwind-merge helper
+    └── lib/                         cn() helper and small content utilities
 ```
+
+Also at the repository root: `.env.example`, `.nvmrc`, `next.config.ts`
+(security headers, image formats) and `.github/workflows/ci.yml`.
 
 All content lives in `src/data`. Detail routes read from those files and are
 prerendered with `generateStaticParams`, so adding a treatment, condition,
@@ -166,16 +169,18 @@ rather than with `useScroll`, which proved unreliable here. Under
 ## Forms
 
 `/book` and `/academics/register` post JSON to route handlers, which validate
-input server-side. Set either webhook to forward submissions:
+input server-side. Copy `.env.example` to `.env.local` and set the endpoints:
 
 ```
 APPOINTMENT_WEBHOOK_URL=
 ACADEMIC_WEBHOOK_URL=          # falls back to APPOINTMENT_WEBHOOK_URL
 ```
 
-Without a webhook the payload is logged to the server console — fine for
-staging, not for production. No clinical detail should be collected through
-these forms.
+Without a webhook the payload is only written to the server logs. On Vercel
+that means the entries live in **Project → Logs** for a short retention window,
+so a webhook is required for production. Any endpoint that accepts a JSON POST
+works — a Google Apps Script web app, Zapier/Make, Formspree or a CRM intake
+URL. No clinical detail should be collected through these forms.
 
 ## Content and clinical accuracy
 
@@ -190,9 +195,15 @@ these forms.
 ## Notes for maintainers
 
 - `src/data/site.ts` holds the copyright year as a static value; `new Date()`
-  cannot be used at render time while Cache Components are enabled.
+  cannot be used at render time while Cache Components are enabled. The same
+  file holds `site.url`, the canonical origin used by metadata, JSON-LD,
+  `sitemap.xml` and `robots.txt`.
 - Detail routes declare `export const instant = false` because they are fully
   prerendered and have no request-time data to stream. Removing it reintroduces a
   dev-only Instant Navigation warning.
-- A hydration mismatch warning appears in development from motion values in
-  server-rendered inline styles. It does not occur in a production build.
+- The journey's decorative SVG is rendered only after hydration (see
+  `useHydrated` in `src/components/fertility-journey.tsx`), because motion
+  rounds the inline transform styles differently on the server; this keeps
+  hydration silent.
+- `.env.example` is committed on purpose, `.env*.local` is not. Never put a
+  secret in a `NEXT_PUBLIC_` variable — it is inlined into the client bundle.
